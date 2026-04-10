@@ -61,7 +61,9 @@ kernel-skills/
         ├── write-cuda-softmax-kernel/
         ├── write-cuda-layernorm-kernel/
         ├── optimize-global-memory-access/
-        └── optimize-shared-memory-tiling/
+        ├── optimize-shared-memory-tiling/
+        ├── avoid-warp-divergence/
+        └── choose-launch-configuration/
 ```
 
 More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming next.
@@ -80,6 +82,8 @@ More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming nex
 | [`write-cuda-layernorm-kernel`](skills/cuda/write-cuda-layernorm-kernel/SKILL.md) | Implement layer normalization with Welford online variance, fused mean/variance computation, and fp32 accumulation in fp16 kernels |
 | [`optimize-global-memory-access`](skills/cuda/optimize-global-memory-access/SKILL.md) | Analyze and fix coalescing, alignment, and vectorized load/store patterns using Nsight Compute metrics |
 | [`optimize-shared-memory-tiling`](skills/cuda/optimize-shared-memory-tiling/SKILL.md) | Apply shared memory tiling with bank conflict analysis, padding strategies, and double buffering |
+| [`avoid-warp-divergence`](skills/cuda/avoid-warp-divergence/SKILL.md) | Classify avoidable vs unavoidable divergence, apply ballot/shuffle fast paths and stream compaction, estimate the real cost before restructuring |
+| [`choose-launch-configuration`](skills/cuda/choose-launch-configuration/SKILL.md) | Select block size, grid size, and shared memory from occupancy analysis, register budget, and workload shape |
 
 ---
 
