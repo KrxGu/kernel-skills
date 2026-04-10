@@ -67,7 +67,9 @@ kernel-skills/
         └── debug-cuda-kernel-correctness/
     └── triton/
         ├── write-triton-gemm-kernel/
-        └── write-triton-softmax-kernel/
+        ├── write-triton-softmax-kernel/
+        ├── write-triton-layernorm-kernel/
+        └── write-triton-attention-kernel/
 ```
 
 More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming next.
@@ -96,6 +98,8 @@ More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming nex
 |---|---|
 | [`write-triton-gemm-kernel`](skills/triton/write-triton-gemm-kernel/SKILL.md) | Write a Triton GEMM kernel with correct block tiling, tl.dot accumulation, row/col-major loading, and when CUTLASS is preferable |
 | [`write-triton-softmax-kernel`](skills/triton/write-triton-softmax-kernel/SKILL.md) | Implement numerically stable softmax in Triton with block size selection for the reduction axis and masking for variable sequence lengths |
+| [`write-triton-layernorm-kernel`](skills/triton/write-triton-layernorm-kernel/SKILL.md) | Implement LayerNorm in Triton with Welford online variance, persistent kernel pattern, and backward pass accumulation strategy |
+| [`write-triton-attention-kernel`](skills/triton/write-triton-attention-kernel/SKILL.md) | Implement Flash Attention in Triton — causal mask handling, kv-block loop structure, online softmax scaling, and fp16/bf16 accumulation decisions |
 
 ---
 
