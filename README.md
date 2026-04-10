@@ -81,6 +81,10 @@ kernel-skills/
         ├── write-int8-quantized-kernel/
         ├── write-fp8-kernel/
         └── debug-quantized-kernel-accuracy/
+    └── portability/
+        ├── port-cuda-kernel-to-triton/
+        ├── port-cuda-kernel-to-hip/
+        └── write-backend-agnostic-kernel-plan/
 ```
 
 More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming next.
@@ -130,6 +134,14 @@ More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming nex
 | [`write-int8-quantized-kernel`](skills/quantization/write-int8-quantized-kernel/SKILL.md) | Implement INT8 quantized matrix operations — dp4a instruction, symmetric vs asymmetric quantization, INT32 accumulation, per-channel scale epilogue, cuBLAS vs CUTLASS vs custom decision |
 | [`write-fp8-kernel`](skills/quantization/write-fp8-kernel/SKILL.md) | Design FP8 compute kernels for Hopper/Ada — E4M3/E5M2 format selection, satfinite conversion, delayed scaling, WGMMA on H100, and hipBLASLt on MI300X |
 | [`debug-quantized-kernel-accuracy`](skills/quantization/debug-quantized-kernel-accuracy/SKILL.md) | Diagnose accuracy regressions in quantized kernels — scale validation, overflow detection, per-element error attribution, and calibration diagnostics |
+
+### Portability
+
+| Skill | Description |
+|---|---|
+| [`port-cuda-kernel-to-triton`](skills/portability/port-cuda-kernel-to-triton/SKILL.md) | Systematically translate a CUDA kernel to Triton — execution model mapping, warp primitives to tl.reduce, shared memory to block-scoped accumulators |
+| [`port-cuda-kernel-to-hip`](skills/portability/port-cuda-kernel-to-hip/SKILL.md) | Port CUDA to HIP/ROCm — wavefront width differences, 64-bit ballot masks, WMMA to rocWMMA, hipify audit checklist for MI250/MI300X targets |
+| [`write-backend-agnostic-kernel-plan`](skills/portability/write-backend-agnostic-kernel-plan/SKILL.md) | Plan a kernel that must run on NVIDIA and AMD — abstraction strategy, portability risk register, per-backend tile sizing, and CI matrix |
 
 ---
 
