@@ -54,37 +54,37 @@ kernel-skills/
 ├── ROADMAP.md
 ├── CLAUDE.md
 ├── .gitignore
-└── skills/
-    └── cuda/
-        ├── write-cuda-gemm-kernel/
-        ├── write-cuda-reduction-kernel/
-        ├── write-cuda-softmax-kernel/
-        ├── write-cuda-layernorm-kernel/
-        ├── optimize-global-memory-access/
-        ├── optimize-shared-memory-tiling/
-        ├── avoid-warp-divergence/
-        ├── choose-launch-configuration/
-        └── debug-cuda-kernel-correctness/
-    └── triton/
-        ├── write-triton-gemm-kernel/
-        ├── write-triton-softmax-kernel/
-        ├── write-triton-layernorm-kernel/
-        ├── write-triton-attention-kernel/
-        └── optimize-triton-block-parameters/
-    └── patterns/
-        ├── fuse-elementwise-ops/
-        ├── write-numerically-stable-kernel/
-        ├── handle-boundary-conditions/
-        ├── choose-tile-size-and-work-partitioning/
-        └── write-kernel-test-plan/
-    └── quantization/
-        ├── write-int8-quantized-kernel/
-        ├── write-fp8-kernel/
-        └── debug-quantized-kernel-accuracy/
-    └── portability/
-        ├── port-cuda-kernel-to-triton/
-        ├── port-cuda-kernel-to-hip/
-        └── write-backend-agnostic-kernel-plan/
+├── skills/
+│   ├── cuda/
+│   │   ├── write-cuda-gemm-kernel/
+│   │   ├── write-cuda-reduction-kernel/
+│   │   ├── write-cuda-softmax-kernel/
+│   │   ├── write-cuda-layernorm-kernel/
+│   │   ├── optimize-global-memory-access/
+│   │   ├── optimize-shared-memory-tiling/
+│   │   ├── avoid-warp-divergence/
+│   │   ├── choose-launch-configuration/
+│   │   └── debug-cuda-kernel-correctness/
+│   ├── triton/
+│   │   ├── write-triton-gemm-kernel/
+│   │   ├── write-triton-softmax-kernel/
+│   │   ├── write-triton-layernorm-kernel/
+│   │   ├── write-triton-attention-kernel/
+│   │   └── optimize-triton-block-parameters/
+│   ├── patterns/
+│   │   ├── fuse-elementwise-ops/
+│   │   ├── write-numerically-stable-kernel/
+│   │   ├── handle-boundary-conditions/
+│   │   ├── choose-tile-size-and-work-partitioning/
+│   │   └── write-kernel-test-plan/
+│   ├── quantization/
+│   │   ├── write-int8-quantized-kernel/
+│   │   ├── write-fp8-kernel/
+│   │   └── debug-quantized-kernel-accuracy/
+│   └── portability/
+│       ├── port-cuda-kernel-to-triton/
+│       ├── port-cuda-kernel-to-hip/
+│       └── write-backend-agnostic-kernel-plan/
 └── examples/
     ├── how-to-use-with-claude-code.md
     ├── how-to-use-with-chatgpt.md
