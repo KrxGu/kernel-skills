@@ -54,150 +54,59 @@ kernel-skills/
 ├── ROADMAP.md
 ├── CLAUDE.md
 ├── .gitignore
-├── skills/
-│   ├── cuda/
-│   │   ├── write-cuda-gemm-kernel/
-│   │   ├── write-cuda-reduction-kernel/
-│   │   ├── write-cuda-softmax-kernel/
-│   │   ├── write-cuda-layernorm-kernel/
-│   │   ├── optimize-global-memory-access/
-│   │   ├── optimize-shared-memory-tiling/
-│   │   ├── avoid-warp-divergence/
-│   │   ├── choose-launch-configuration/
-│   │   └── debug-cuda-kernel-correctness/
-│   ├── triton/
-│   │   ├── write-triton-gemm-kernel/
-│   │   ├── write-triton-softmax-kernel/
-│   │   ├── write-triton-layernorm-kernel/
-│   │   ├── write-triton-attention-kernel/
-│   │   └── optimize-triton-block-parameters/
-│   ├── patterns/
-│   │   ├── fuse-elementwise-ops/
-│   │   ├── write-numerically-stable-kernel/
-│   │   ├── handle-boundary-conditions/
-│   │   ├── choose-tile-size-and-work-partitioning/
-│   │   └── write-kernel-test-plan/
-│   ├── quantization/
-│   │   ├── write-int8-quantized-kernel/
-│   │   ├── write-fp8-kernel/
-│   │   └── debug-quantized-kernel-accuracy/
-│   └── portability/
-│       ├── port-cuda-kernel-to-triton/
-│       ├── port-cuda-kernel-to-hip/
-│       └── write-backend-agnostic-kernel-plan/
-└── examples/
-    ├── how-to-use-with-claude-code.md
-    ├── how-to-use-with-chatgpt.md
-    ├── how-to-use-with-cursor.md
-    └── how-to-use-with-gemini-cli.md
+└── skills/
+    └── cuda/
+        ├── write-cuda-gemm-kernel/
+        ├── write-cuda-reduction-kernel/
+        ├── write-cuda-softmax-kernel/
+        ├── write-cuda-layernorm-kernel/
+        ├── optimize-global-memory-access/
+        └── optimize-shared-memory-tiling/
 ```
+
+More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming next.
 
 ---
 
-## Skills included in v0
+## Skills
 
 ### CUDA
 
 | Skill | Description |
 |---|---|
-| `write-cuda-gemm-kernel` | Design and implement a CUDA GEMM kernel with correct tiling, shared memory usage, and layout awareness |
-| `write-cuda-reduction-kernel` | Write a correct and efficient parallel reduction with warp-level primitives and multi-pass strategy |
-| `write-cuda-softmax-kernel` | Implement online or two-pass softmax with numerically stable accumulation and correct reduction |
-| `write-cuda-layernorm-kernel` | Implement layer normalization with fused mean/variance computation and correct accumulation |
-| `optimize-global-memory-access` | Analyze and fix coalescing, alignment, and vectorized load/store patterns |
-| `optimize-shared-memory-tiling` | Apply shared memory tiling with correct bank conflict analysis and synchronization |
-| `avoid-warp-divergence` | Identify and eliminate control flow divergence within warps |
-| `debug-cuda-kernel-correctness` | Systematic approach to isolating and fixing correctness bugs in CUDA kernels |
-
-### Triton
-
-| Skill | Description |
-|---|---|
-| `write-triton-gemm-kernel` | Write a Triton GEMM kernel with correct block tiling and memory access patterns |
-| `write-triton-softmax-kernel` | Implement softmax in Triton with correct reduction and masking |
-| `write-triton-layernorm-kernel` | Implement layer normalization in Triton with correct numerics |
-| `write-triton-attention-kernel` | Implement attention (including flash attention style) in Triton |
-| `optimize-triton-block-parameters` | Reason about and select block sizes, number of warps, and pipeline stages for Triton kernels |
-
-### Patterns
-
-| Skill | Description |
-|---|---|
-| `fuse-elementwise-ops` | Decide when and how to fuse elementwise operations into a single kernel |
-| `write-numerically-stable-kernel` | Apply Kahan summation, online normalization, and log-sum-exp patterns correctly |
-| `handle-boundary-conditions` | Handle partial tiles, misaligned sizes, and out-of-bounds accesses correctly |
-| `write-kernel-test-plan` | Design a correctness and numerical test plan for a custom kernel |
-
-### Quantization
-
-| Skill | Description |
-|---|---|
-| `write-int8-quantized-kernel` | Implement int8 quantized operations with correct scale/zero-point handling |
-| `debug-quantized-kernel-accuracy` | Diagnose accuracy regressions in quantized kernels |
-
-### Portability
-
-| Skill | Description |
-|---|---|
-| `port-cuda-kernel-to-triton` | Systematically translate a CUDA kernel to Triton, preserving correctness and intent |
+| [`write-cuda-gemm-kernel`](skills/cuda/write-cuda-gemm-kernel/SKILL.md) | Design and implement a tiled CUDA GEMM kernel — shared memory strategy, tensor core eligibility, accumulation precision, and when to use cuBLAS/CUTLASS instead |
+| [`write-cuda-reduction-kernel`](skills/cuda/write-cuda-reduction-kernel/SKILL.md) | Write a correct parallel reduction with warp shuffle tree, multi-block strategy, and correct handling of partial tiles |
+| [`write-cuda-softmax-kernel`](skills/cuda/write-cuda-softmax-kernel/SKILL.md) | Implement online or two-pass softmax with numerically stable max subtraction and correct warp-level reduction |
+| [`write-cuda-layernorm-kernel`](skills/cuda/write-cuda-layernorm-kernel/SKILL.md) | Implement layer normalization with Welford online variance, fused mean/variance computation, and fp32 accumulation in fp16 kernels |
+| [`optimize-global-memory-access`](skills/cuda/optimize-global-memory-access/SKILL.md) | Analyze and fix coalescing, alignment, and vectorized load/store patterns using Nsight Compute metrics |
+| [`optimize-shared-memory-tiling`](skills/cuda/optimize-shared-memory-tiling/SKILL.md) | Apply shared memory tiling with bank conflict analysis, padding strategies, and double buffering |
 
 ---
 
 ## How to use a skill
 
-### The basic workflow
-
 1. Find the skill that matches your task in `skills/`.
-2. Open the `SKILL.md` file and paste its contents into your agent's context (system prompt, conversation, or project instructions file).
-3. Ask the agent to perform the task. The skill shapes how the agent reasons, what it asks before coding, and what it produces.
+2. Open the `SKILL.md` file and paste its full contents into your agent's context.
+3. Ask the agent to perform the task.
 
-The skill does not replace your prompt. It augments the agent's reasoning process so the output is more correct, more explicit, and more technically grounded.
+The skill does not replace your prompt — it forces the agent to reason correctly before writing a single line of code.
 
----
-
-### Using with Claude Code
-
-Paste the skill content directly into your conversation, or add it to your project's `CLAUDE.md` file so it applies to all relevant requests in that project.
+### Example (Claude Code)
 
 ```
-# In your Claude Code session:
 <paste contents of skills/cuda/write-cuda-reduction-kernel/SKILL.md>
 
-Now write a warp-shuffle based reduction kernel for float32 inputs on an H100.
-Input shape: [B, N] where B=32, N=65536. Output: [B] of per-row sums.
+Write a warp-shuffle reduction kernel for float32 inputs on an H100.
+Input shape: [B=32, N=65536]. Output: [B] row-wise sums.
 ```
 
-See `examples/how-to-use-with-claude-code.md` for a full walkthrough.
-
----
-
-### Using with ChatGPT
-
-Paste the skill content into the system prompt or at the top of the conversation. For Custom GPTs, add the skill content to the system instructions.
-
-See `examples/how-to-use-with-chatgpt.md` for a full walkthrough.
-
----
-
-### Using with Cursor
-
-Add the skill content to your `.cursorrules` file or paste it into the Cursor chat before making your request.
-
-See `examples/how-to-use-with-cursor.md` for a full walkthrough.
-
----
-
-### Using with Gemini CLI
-
-Paste the skill into your prompt, or add it to a `GEMINI.md` file in your project root for persistent context.
-
-See `examples/how-to-use-with-gemini-cli.md` for a full walkthrough.
+The skill works the same way with ChatGPT, Cursor, Gemini CLI, and any other agent that accepts context.
 
 ---
 
 ## Contributing
 
-Contributions are welcome. Before opening a pull request, read `CONTRIBUTING.md`.
+Contributions are welcome. Before opening a pull request, read [CONTRIBUTING.md](CONTRIBUTING.md).
 
 The short version: open an issue first to propose the skill scope, follow the required 11-section `SKILL.md` template, meet the quality bar, and keep naming conventions consistent.
 
@@ -207,9 +116,9 @@ Low-quality, vague, or out-of-scope skill files will not be merged regardless of
 
 ## Roadmap
 
-The v0 goal is simple: prove that well-authored skill files materially improve agent kernel output.
+More skills are being added across CUDA, Triton, quantization, and portability. Following the quality-first principle: each skill ships only when it is genuinely better than a generic prompt.
 
-Future versions may add metadata, tagging, indexing, and eventually packaging — but only after v0 demonstrates clear value. See `ROADMAP.md` for details.
+See [ROADMAP.md](ROADMAP.md) for the full plan.
 
 ---
 
