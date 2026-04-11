@@ -29,6 +29,52 @@ This repository exists to provide those skill files at expert quality, openly, f
 
 ---
 
+## Measured impact
+
+> Same model. Same prompt. One difference: a kernel skill file.
+> The naive softmax kernel fails on overflow and large shapes. The skill-guided version stays correct and bandwidth-competitive.
+
+![Proof of impact — pass/fail heatmap, stat cards, bandwidth chart](proof/assets/softmax/hero-proof.png)
+
+### Correctness: pass / fail matrix
+
+| Shape N | Naive · normal | Stable · normal | Naive · adversarial | Stable · adversarial |
+|---|---|---|---|---|
+| 64 | ✅ | ✅ | ❌ | ✅ |
+| 128 | ✅ | ✅ | ❌ | ✅ |
+| 256 | ✅ | ✅ | ❌ | ✅ |
+| **257** | **❌** | ✅ | ❌ | ✅ |
+| 512 | ❌ | ✅ | ❌ | ✅ |
+| 1024 | ❌ | ✅ | ❌ | ✅ |
+| 2048 | ❌ | ✅ | ❌ | ✅ |
+| 4096 | ❌ | ✅ | ❌ | ✅ |
+
+Naive adversarial: **8/8 shapes fail** — NaN/Inf output, no max subtraction.  
+Naive normal for N > 256: **5/5 shapes fail** — silent wrong output, no strided loop.  
+Stable after skill: **0/16 failures**. Bandwidth within 1.2% of `torch.softmax`.
+
+### The two changes the skill directed
+
+```diff
+- // no max subtraction → NaN on adversarial inputs
+- float val = (tid < N) ? expf(x[tid]) : 0.0f;
+-
+- // no strided loop → wrong output for N > blockDim.x
+- if (tid < N) y[tid] = val / denom;
+
++ // FIX 1: strided loop handles arbitrary N  (skill: handle-boundary-conditions)
++ for (int i = tid; i < N; i += blockDim.x)
++     tmax = fmaxf(tmax, x[i]);
++
++ // FIX 2: subtract max before expf  (skill: write-numerically-stable-kernel)
++ for (int i = tid; i < N; i += blockDim.x)
++     y[i] = expf(x[i] - row_max) / row_sum;
+```
+
+→ [Full proof page with root-cause analysis and all charts](proof/softmax-correctness.md)
+
+---
+
 ## Who it is for
 
 This repository is for engineers who use AI coding agents to work on:
@@ -85,11 +131,18 @@ kernel-skills/
 │       ├── port-cuda-kernel-to-triton/
 │       ├── port-cuda-kernel-to-hip/
 │       └── write-backend-agnostic-kernel-plan/
-└── examples/
-    ├── how-to-use-with-claude-code.md
-    ├── how-to-use-with-chatgpt.md
-    ├── how-to-use-with-cursor.md
-    └── how-to-use-with-gemini-cli.md
+├── examples/
+│   ├── how-to-use-with-claude-code.md
+│   ├── how-to-use-with-chatgpt.md
+│   ├── how-to-use-with-cursor.md
+│   └── how-to-use-with-gemini-cli.md
+└── proof/
+    ├── softmax-correctness.md
+    ├── generate_visuals.py
+    └── assets/softmax/
+        ├── hero-proof.png
+        ├── error-cliff.png
+        └── code-diff.png
 ```
 
 More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming next.
