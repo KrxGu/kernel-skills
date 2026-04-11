@@ -20,7 +20,7 @@ The naive kernel failed in two independent ways. The stable kernel passed all co
 | Dtype | float32 |
 | Model | Claude Sonnet 4.6 |
 | Pass threshold | max absolute error < 1e-3 |
-| Benchmark script | [proof/benchmark_before_after.py](benchmark_before_after.py) |
+| Benchmark script | `proof/cuda/softmax/benchmark_before_after.py` (attach when contributing) |
 
 ---
 
@@ -49,15 +49,15 @@ The naive kernel failed in two independent ways. The stable kernel passed all co
 
 ### Hero chart — stat cards + pass/fail heatmap + bandwidth
 
-![Hero proof](assets/softmax/hero-proof.png)
+![Hero proof](hero-proof.png)
 
 ### Error cliff — normal-input error at N=257 and adversarial failure count
 
-![Error cliff](assets/softmax/error-cliff.png)
+![Error cliff](error-cliff.png)
 
 ### Code diff — the two concrete changes directed by the skill file
 
-![Code diff](assets/softmax/code-diff.png)
+![Code diff](code-diff.png)
 
 ---
 
@@ -155,14 +155,11 @@ git clone https://github.com/KrxGu/kernel-skills.git
 cd kernel-skills
 
 # Run benchmark (requires CUDA GPU, CuPy, PyTorch, and an API key for Claude)
-python proof/benchmark_before_after.py
-
-# Regenerate charts from recorded data
-python proof/generate_visuals.py
+python proof/cuda/softmax/benchmark_before_after.py
 ```
 
 ---
 
 ## Related skill
 
-[`skills/cuda/write-cuda-softmax-kernel/SKILL.md`](../skills/cuda/write-cuda-softmax-kernel/SKILL.md)
+[`skills/cuda/write-cuda-softmax-kernel/SKILL.md`](../../../skills/cuda/write-cuda-softmax-kernel/SKILL.md)
