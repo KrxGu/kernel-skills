@@ -34,7 +34,7 @@ This repository exists to provide those skill files at expert quality, openly, f
 > Same model. Same prompt. One difference: a kernel skill file.
 > The naive softmax kernel fails on overflow and large shapes. The skill-guided version stays correct and bandwidth-competitive.
 
-![Proof of impact — pass/fail heatmap, stat cards, bandwidth chart](proof/assets/softmax/hero-proof.png)
+![Proof of impact — pass/fail heatmap, stat cards, bandwidth chart](proof/cuda/softmax/hero-proof.png)
 
 ### Correctness: pass / fail matrix
 
@@ -71,7 +71,7 @@ Stable after skill: **0/16 failures**. Bandwidth within 1.2% of `torch.softmax`.
 +     y[i] = expf(x[i] - row_max) / row_sum;
 ```
 
-→ [Full proof page with root-cause analysis and all charts](proof/softmax-correctness.md)
+→ [Full proof page with root-cause analysis and all charts](proof/cuda/softmax/softmax-correctness.md)
 
 ---
 
@@ -131,18 +131,23 @@ kernel-skills/
 │       ├── port-cuda-kernel-to-triton/
 │       ├── port-cuda-kernel-to-hip/
 │       └── write-backend-agnostic-kernel-plan/
-├── examples/
-│   ├── how-to-use-with-claude-code.md
-│   ├── how-to-use-with-chatgpt.md
-│   ├── how-to-use-with-cursor.md
-│   └── how-to-use-with-gemini-cli.md
-└── proof/
-    ├── softmax-correctness.md
-    ├── generate_visuals.py
-    └── assets/softmax/
-        ├── hero-proof.png
-        ├── error-cliff.png
-        └── code-diff.png
+├── proof/
+│   ├── README.md
+│   ├── cuda/
+│   │   └── softmax/
+│   │       ├── softmax-correctness.md
+│   │       ├── hero-proof.png
+│   │       ├── error-cliff.png
+│   │       └── code-diff.png
+│   ├── triton/
+│   ├── patterns/
+│   ├── quantization/
+│   └── portability/
+└── examples/
+    ├── how-to-use-with-claude-code.md
+    ├── how-to-use-with-chatgpt.md
+    ├── how-to-use-with-cursor.md
+    └── how-to-use-with-gemini-cli.md
 ```
 
 More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming next.
