@@ -20,7 +20,7 @@ The naive kernel failed in two independent ways. The stable kernel passed all co
 | Dtype | float32 |
 | Model | Claude Sonnet 4.6 |
 | Pass threshold | max absolute error < 1e-3 |
-| Benchmark script | `proof/cuda/softmax/benchmark_before_after.py` (attach when contributing) |
+| Benchmark script | not included — run locally, results recorded here |
 
 ---
 
@@ -149,14 +149,14 @@ With skill guidance, both were implemented correctly in the first generation.
 
 ## Reproducing this result
 
-```bash
-# Clone repo
-git clone https://github.com/KrxGu/kernel-skills.git
-cd kernel-skills
+The benchmark script is not included in this repository. To reproduce:
 
-# Run benchmark (requires CUDA GPU, CuPy, PyTorch, and an API key for Claude)
-python proof/cuda/softmax/benchmark_before_after.py
-```
+1. Generate a naive softmax CUDA kernel using the same model and prompt **without** the skill file.
+2. Generate a stable softmax kernel using the same prompt **with** `skills/cuda/write-cuda-softmax-kernel/SKILL.md` injected into context.
+3. Run both kernels with CuPy or a Python CUDA wrapper against the 8 shapes listed above, on normal inputs and adversarial inputs (large uniform values such as 500.0f).
+4. Compare max absolute error per shape against `torch.softmax` as reference.
+
+If you reproduce this and want to contribute the benchmark script, drop it in this directory as `benchmark_before_after.py` and open a pull request.
 
 ---
 
