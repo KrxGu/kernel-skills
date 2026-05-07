@@ -1,3 +1,14 @@
+# Node / npm
+node_modules/
+*.tgz
+.npm/
+
+# TypeScript build output
+dist/
+
+# Generated skill index (regenerated at build time)
+generated/
+
 # Python
 __pycache__/
 *.py[cod]

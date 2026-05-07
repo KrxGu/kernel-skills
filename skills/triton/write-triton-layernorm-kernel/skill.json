@@ -1,0 +1,12 @@
+{
+  "id": "triton.write-triton-layernorm-kernel",
+  "name": "Write Triton LayerNorm Kernel",
+  "category": "triton",
+  "summary": "Implement LayerNorm in Triton with Welford online variance, persistent kernel pattern, and backward pass accumulation strategy.",
+  "tags": ["triton", "layernorm", "rmsnorm", "normalization", "welford", "persistent-kernel", "backward-pass", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/triton/write-triton-layernorm-kernel/SKILL.md"
+}

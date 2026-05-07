@@ -1,0 +1,12 @@
+{
+  "id": "cuda.optimize-global-memory-access",
+  "name": "Optimize CUDA Global Memory Access",
+  "category": "cuda",
+  "summary": "Analyze and fix coalescing, alignment, and vectorized load/store patterns using Nsight Compute metrics.",
+  "tags": ["cuda", "memory-coalescing", "vectorized-loads", "nsight", "optimization", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/optimize-global-memory-access/SKILL.md"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "cuda.write-cuda-gemm-kernel",
+  "name": "Write CUDA GEMM Kernel",
+  "category": "cuda",
+  "summary": "Design and implement a tiled CUDA GEMM kernel — shared memory strategy, tensor core eligibility, accumulation precision, and when to use cuBLAS or CUTLASS instead.",
+  "tags": ["cuda", "gemm", "matmul", "tensor-cores", "tiling", "shared-memory", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/write-cuda-gemm-kernel/SKILL.md"
+}

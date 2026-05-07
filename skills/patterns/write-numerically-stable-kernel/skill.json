@@ -1,0 +1,12 @@
+{
+  "id": "patterns.write-numerically-stable-kernel",
+  "name": "Write Numerically Stable Kernel",
+  "category": "patterns",
+  "summary": "Apply Kahan summation, log-sum-exp trick, compensated accumulation, and dtype selection for stable intermediate values.",
+  "tags": ["numerical-stability", "kahan-summation", "log-sum-exp", "accumulation", "fp16", "fp32", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["cuda", "triton", "python"],
+  "version": "0.1.0",
+  "entry": "skills/patterns/write-numerically-stable-kernel/SKILL.md"
+}

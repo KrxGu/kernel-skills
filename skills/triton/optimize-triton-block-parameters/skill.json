@@ -1,0 +1,12 @@
+{
+  "id": "triton.optimize-triton-block-parameters",
+  "name": "Optimize Triton Block Parameters",
+  "category": "triton",
+  "summary": "Select BLOCK_M/N/K, num_warps, and num_stages; reason about register pressure, occupancy, and autotuning config design.",
+  "tags": ["triton", "autotuning", "block-size", "num-warps", "num-stages", "occupancy", "optimization", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/triton/optimize-triton-block-parameters/SKILL.md"
+}

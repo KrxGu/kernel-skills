@@ -1,0 +1,12 @@
+{
+  "id": "patterns.write-kernel-test-plan",
+  "name": "Write Kernel Test Plan",
+  "category": "patterns",
+  "summary": "Design a correctness and numerical test plan — reference comparison strategy, input shape sweep, dtype coverage, tolerance reasoning, and CI integration.",
+  "tags": ["testing", "correctness", "tolerance", "shape-sweep", "ci", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "cuda", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/patterns/write-kernel-test-plan/SKILL.md"
+}

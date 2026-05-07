@@ -1,0 +1,12 @@
+{
+  "id": "patterns.handle-boundary-conditions",
+  "name": "Handle Boundary Conditions",
+  "category": "patterns",
+  "summary": "Handle partial tiles, misaligned sizes, and out-of-bounds accesses correctly — masked loads, predicated stores, and tail handling strategies.",
+  "tags": ["boundary-conditions", "masking", "partial-tiles", "out-of-bounds", "correctness", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["cuda", "triton", "python"],
+  "version": "0.1.0",
+  "entry": "skills/patterns/handle-boundary-conditions/SKILL.md"
+}

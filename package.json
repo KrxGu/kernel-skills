@@ -1,0 +1,65 @@
+{
+  "name": "@krxgu/kernel-skills",
+  "version": "0.1.0",
+  "description": "Versioned skill registry for AI agents working on CUDA, Triton, quantization, and GPU kernel optimization.",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "bin": {
+    "kernel-skills": "dist/src/cli.js"
+  },
+  "files": [
+    "dist/src",
+    "skills",
+    "generated",
+    "schema",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "generate:index": "tsx scripts/generate-index.ts",
+    "validate:skills": "tsx scripts/validate-skills.ts",
+    "build": "tsc",
+    "prebuild": "npm run generate:index && npm run validate:skills",
+    "test": "npm run validate:skills",
+    "prepack": "npm run build",
+    "publish:dry-run": "npm pack --dry-run"
+  },
+  "keywords": [
+    "cuda",
+    "triton",
+    "gpu",
+    "gpu-kernels",
+    "kernel-optimization",
+    "quantization",
+    "llm-inference",
+    "ai-agents",
+    "coding-agents",
+    "skills"
+  ],
+  "author": "KrxGu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrxGu/kernel-skills.git"
+  },
+  "homepage": "https://github.com/KrxGu/kernel-skills#readme",
+  "bugs": {
+    "url": "https://github.com/KrxGu/kernel-skills/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

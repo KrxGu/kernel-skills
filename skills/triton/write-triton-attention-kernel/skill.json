@@ -1,0 +1,12 @@
+{
+  "id": "triton.write-triton-attention-kernel",
+  "name": "Write Triton Attention Kernel",
+  "category": "triton",
+  "summary": "Implement Flash Attention in Triton — causal mask handling, kv-block loop structure, online softmax scaling, and fp16/bf16 accumulation decisions.",
+  "tags": ["triton", "attention", "flash-attention", "causal-mask", "online-softmax", "fp16", "bf16", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/triton/write-triton-attention-kernel/SKILL.md"
+}

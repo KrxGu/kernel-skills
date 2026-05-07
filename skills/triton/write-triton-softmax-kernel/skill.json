@@ -1,0 +1,12 @@
+{
+  "id": "triton.write-triton-softmax-kernel",
+  "name": "Write Triton Softmax Kernel",
+  "category": "triton",
+  "summary": "Implement numerically stable softmax in Triton with block size selection for the reduction axis and masking for variable sequence lengths.",
+  "tags": ["triton", "softmax", "numerical-stability", "masking", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/triton/write-triton-softmax-kernel/SKILL.md"
+}

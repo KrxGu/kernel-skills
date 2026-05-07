@@ -1,0 +1,12 @@
+{
+  "id": "portability.write-backend-agnostic-kernel-plan",
+  "name": "Write Backend-Agnostic Kernel Plan",
+  "category": "portability",
+  "summary": "Plan a kernel that must run on NVIDIA and AMD — abstraction strategy, portability risk register, per-backend tile sizing, and CI matrix.",
+  "tags": ["portability", "backend-agnostic", "nvidia", "amd", "ci", "abstraction", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["cuda", "hip", "triton", "python"],
+  "version": "0.1.0",
+  "entry": "skills/portability/write-backend-agnostic-kernel-plan/SKILL.md"
+}

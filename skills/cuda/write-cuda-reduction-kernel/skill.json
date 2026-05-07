@@ -1,0 +1,12 @@
+{
+  "id": "cuda.write-cuda-reduction-kernel",
+  "name": "Write CUDA Reduction Kernel",
+  "category": "cuda",
+  "summary": "Write a correct parallel reduction with warp shuffle tree, multi-block strategy, and correct handling of partial tiles.",
+  "tags": ["cuda", "reduction", "warp-shuffle", "parallel-primitives", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/write-cuda-reduction-kernel/SKILL.md"
+}

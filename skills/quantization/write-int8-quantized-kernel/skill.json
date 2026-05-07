@@ -1,0 +1,12 @@
+{
+  "id": "quantization.write-int8-quantized-kernel",
+  "name": "Write INT8 Quantized Kernel",
+  "category": "quantization",
+  "summary": "Implement INT8 quantized matrix operations — dp4a instruction, symmetric vs asymmetric quantization, INT32 accumulation, per-channel scale epilogue, cuBLAS vs CUTLASS vs custom decision.",
+  "tags": ["quantization", "int8", "dp4a", "cublas", "cutlass", "per-channel-scale", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/quantization/write-int8-quantized-kernel/SKILL.md"
+}

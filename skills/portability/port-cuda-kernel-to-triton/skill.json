@@ -1,0 +1,12 @@
+{
+  "id": "portability.port-cuda-kernel-to-triton",
+  "name": "Port CUDA Kernel to Triton",
+  "category": "portability",
+  "summary": "Systematically translate a CUDA kernel to Triton — execution model mapping, warp primitives to tl.reduce, shared memory to block-scoped accumulators.",
+  "tags": ["portability", "cuda", "triton", "porting", "execution-model", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["cuda", "python", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/portability/port-cuda-kernel-to-triton/SKILL.md"
+}

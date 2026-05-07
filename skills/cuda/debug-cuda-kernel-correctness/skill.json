@@ -1,0 +1,12 @@
+{
+  "id": "cuda.debug-cuda-kernel-correctness",
+  "name": "Debug CUDA Kernel Correctness",
+  "category": "cuda",
+  "summary": "Systematic workflow for isolating indexing bugs, race conditions, reduction errors, dtype issues, and out-of-bounds accesses in CUDA kernels.",
+  "tags": ["cuda", "debugging", "correctness", "race-conditions", "out-of-bounds", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/debug-cuda-kernel-correctness/SKILL.md"
+}

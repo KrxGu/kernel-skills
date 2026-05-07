@@ -1,0 +1,12 @@
+{
+  "id": "triton.write-triton-gemm-kernel",
+  "name": "Write Triton GEMM Kernel",
+  "category": "triton",
+  "summary": "Write a Triton GEMM kernel with correct block tiling, tl.dot accumulation, row/col-major loading, and when CUTLASS is preferable.",
+  "tags": ["triton", "gemm", "matmul", "tiling", "tl-dot", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/triton/write-triton-gemm-kernel/SKILL.md"
+}

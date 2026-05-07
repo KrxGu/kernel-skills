@@ -1,0 +1,12 @@
+{
+  "id": "patterns.fuse-elementwise-ops",
+  "name": "Fuse Elementwise Ops",
+  "category": "patterns",
+  "summary": "Decide when and how to fuse elementwise operations — memory bandwidth arithmetic, producer-consumer fusion, and epilogue fusion patterns.",
+  "tags": ["fusion", "elementwise", "epilogue", "memory-bandwidth", "optimization", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["cuda", "triton", "python"],
+  "version": "0.1.0",
+  "entry": "skills/patterns/fuse-elementwise-ops/SKILL.md"
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/KrxGu/kernel-skills/schema/skill.schema.json",
+  "title": "KernelSkill",
+  "description": "Metadata for a single skill in the kernel-skills registry. Lives next to SKILL.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "category", "summary", "tags", "difficulty", "version", "entry"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier of the form '<category>.<skill-folder>'."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Human-readable name."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["cuda", "triton", "patterns", "quantization", "portability", "inference"],
+      "description": "Top-level category. Must match the parent folder under skills/."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20,
+      "description": "One-sentence description of what the skill helps the agent do."
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Free-form tags for search and filtering."
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"]
+    },
+    "hardware": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["nvidia", "amd", "intel", "apple", "cpu"] },
+      "description": "Hardware targets the skill is intended for."
+    },
+    "languages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Languages or DSLs relevant to the skill (e.g. cuda, cpp, triton, python)."
+    },
+    "requires": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Skill ids this skill builds on."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the skill itself, independent of package version."
+    },
+    "entry": {
+      "type": "string",
+      "pattern": "^skills/[^/]+/[^/]+/SKILL\\.md$",
+      "description": "Path to the skill's SKILL.md, relative to the package root."
+    }
+  }
+}

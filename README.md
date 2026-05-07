@@ -8,7 +8,15 @@
 
 kernel-skills is a curated collection of `SKILL.md` files. Each file is a structured engineering playbook that an AI coding agent can follow when writing, optimizing, debugging, or porting compute kernels.
 
-This repository is not a runtime, framework, package manager, benchmark harness, or MCP server. It is a library of Markdown files. No installation required. No tooling required. Pick a skill, read it or paste it into your agent workflow, and get better kernel output.
+The skills are the product. The repository also ships an npm package (`@krxgu/kernel-skills`) that wraps them in a versioned registry with a small CLI and TypeScript API. Use the npm package if you want to script skill discovery and bundling; otherwise just read or paste the Markdown directly.
+
+## What it is not
+
+- **not a kernel compiler** — it never invokes nvcc, ptxas, or hip-clang
+- **not a benchmark harness** — it does not run kernels or measure performance
+- **not a model-serving runtime**
+- **not an autonomous coding agent**
+- **does not execute generated code**
 
 ---
 
@@ -75,6 +83,56 @@ It is also useful for engineers who want a technical reference for how to approa
 
 ---
 
+## Installation
+
+Install the package:
+
+```bash
+npm install @krxgu/kernel-skills
+```
+
+Or run any CLI command without installing:
+
+```bash
+npx @krxgu/kernel-skills list
+```
+
+You can also clone the repo and use the `SKILL.md` files directly — the npm package is a convenience layer on top of that source of truth.
+
+## CLI
+
+```bash
+kernel-skills list
+kernel-skills list --category triton
+kernel-skills search rmsnorm
+kernel-skills show triton.write-triton-layernorm-kernel
+kernel-skills path triton.write-triton-layernorm-kernel
+kernel-skills bundle triton.write-triton-layernorm-kernel patterns.write-kernel-test-plan
+kernel-skills categories
+kernel-skills tags
+```
+
+Full reference: [examples/cli-usage.md](examples/cli-usage.md). Bundling guide: [examples/agent-bundle-usage.md](examples/agent-bundle-usage.md).
+
+## Programmatic usage
+
+```ts
+import { searchSkills, getSkill, bundleSkills } from "@krxgu/kernel-skills";
+
+const matches = searchSkills("rmsnorm");
+
+const skill = await getSkill("triton.write-triton-layernorm-kernel");
+
+const bundle = await bundleSkills([
+  "triton.write-triton-layernorm-kernel",
+  "patterns.write-kernel-test-plan",
+]);
+
+console.log(bundle);
+```
+
+Full API: [examples/programmatic-usage.md](examples/programmatic-usage.md).
+
 ## Repository structure
 
 ```
@@ -85,39 +143,31 @@ kernel-skills/
 ├── CODE_OF_CONDUCT.md
 ├── ROADMAP.md
 ├── CLAUDE.md
+├── package.json
+├── tsconfig.json
 ├── .gitignore
-├── skills/
+├── src/                    # TypeScript source (CLI + programmatic API)
+│   ├── index.ts
+│   ├── registry.ts
+│   ├── search.ts
+│   ├── bundle.ts
+│   ├── cli.ts
+│   ├── paths.ts
+│   └── types.ts
+├── scripts/                # build-time scripts
+│   ├── generate-index.ts
+│   └── validate-skills.ts
+├── schema/
+│   └── skill.schema.json   # JSON Schema for skill.json metadata
+├── generated/
+│   └── skills.index.json   # regenerated at build, ships in npm tarball
+├── skills/                 # source of truth for all skills
 │   ├── cuda/
-│   │   ├── write-cuda-gemm-kernel/
-│   │   ├── write-cuda-reduction-kernel/
-│   │   ├── write-cuda-softmax-kernel/
-│   │   ├── write-cuda-layernorm-kernel/
-│   │   ├── optimize-global-memory-access/
-│   │   ├── optimize-shared-memory-tiling/
-│   │   ├── avoid-warp-divergence/
-│   │   ├── choose-launch-configuration/
-│   │   └── debug-cuda-kernel-correctness/
 │   ├── triton/
-│   │   ├── write-triton-gemm-kernel/
-│   │   ├── write-triton-softmax-kernel/
-│   │   ├── write-triton-layernorm-kernel/
-│   │   ├── write-triton-attention-kernel/
-│   │   └── optimize-triton-block-parameters/
 │   ├── patterns/
-│   │   ├── fuse-elementwise-ops/
-│   │   ├── write-numerically-stable-kernel/
-│   │   ├── handle-boundary-conditions/
-│   │   ├── choose-tile-size-and-work-partitioning/
-│   │   └── write-kernel-test-plan/
 │   ├── quantization/
-│   │   ├── write-int8-quantized-kernel/
-│   │   ├── write-fp8-kernel/
-│   │   └── debug-quantized-kernel-accuracy/
 │   └── portability/
-│       ├── port-cuda-kernel-to-triton/
-│       ├── port-cuda-kernel-to-hip/
-│       └── write-backend-agnostic-kernel-plan/
-├── proof/
+├── proof/                  # measured before/after evidence per skill
 │   ├── README.md
 │   ├── cuda/
 │   │   └── softmax/
@@ -133,8 +183,13 @@ kernel-skills/
     ├── how-to-use-with-claude-code.md
     ├── how-to-use-with-chatgpt.md
     ├── how-to-use-with-cursor.md
-    └── how-to-use-with-gemini-cli.md
+    ├── how-to-use-with-gemini-cli.md
+    ├── cli-usage.md
+    ├── programmatic-usage.md
+    └── agent-bundle-usage.md
 ```
+
+Each `skills/<category>/<skill>/` directory contains both `SKILL.md` (the playbook) and `skill.json` (machine-readable metadata).
 
 More skills are being added. See [ROADMAP.md](ROADMAP.md) for what is coming next.
 
@@ -221,6 +276,80 @@ The skill works the same way with ChatGPT, Cursor, Gemini CLI, and any other age
 | Gemini CLI | [examples/how-to-use-with-gemini-cli.md](examples/how-to-use-with-gemini-cli.md) |
 
 ---
+
+## Skill metadata format
+
+Every skill ships with a `skill.json` next to its `SKILL.md`. Example:
+
+```json
+{
+  "id": "triton.write-triton-layernorm-kernel",
+  "name": "Write Triton LayerNorm Kernel",
+  "category": "triton",
+  "summary": "Implement LayerNorm in Triton with Welford online variance, persistent kernel pattern, and backward pass accumulation strategy.",
+  "tags": ["triton", "layernorm", "normalization", "welford"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/triton/write-triton-layernorm-kernel/SKILL.md"
+}
+```
+
+The full schema is in [schema/skill.schema.json](schema/skill.schema.json). The build aggregates every `skill.json` into `generated/skills.index.json`, which is what the CLI and programmatic API read from.
+
+Allowed categories: `cuda`, `triton`, `patterns`, `quantization`, `portability`, `inference`.
+
+Allowed difficulty values: `beginner`, `intermediate`, `advanced`.
+
+## Adding a new skill
+
+1. Create `skills/<category>/<skill-name>/SKILL.md` following the 11-section template documented in [CONTRIBUTING.md](CONTRIBUTING.md).
+2. Create `skills/<category>/<skill-name>/skill.json` with the metadata fields above.
+3. Run `npm run validate:skills` to confirm the metadata is well-formed and the `SKILL.md` exists.
+4. Run `npm run generate:index` to regenerate `generated/skills.index.json`.
+5. Open a pull request.
+
+The validator rejects: missing `skill.json`, missing required fields, duplicate `id`s, unknown categories, mismatched parent folder vs `category`, empty tags arrays, invalid difficulty, unparseable JSON, missing `entry` files, and `SKILL.md` files smaller than 400 bytes.
+
+## Publishing workflow
+
+Before publishing:
+
+```bash
+npm install
+npm run generate:index
+npm run validate:skills
+npm run build
+npm run test
+npm run publish:dry-run
+```
+
+Inspect the dry-run output and confirm only `dist/`, `skills/`, `generated/`, `schema/`, `examples/`, `README.md`, `LICENSE`, and `package.json` are included.
+
+First publish (scoped public package):
+
+```bash
+npm login
+npm publish --access public
+```
+
+Subsequent versions:
+
+```bash
+npm version patch   # or minor / major
+npm publish
+```
+
+## Versioning policy
+
+Semantic versioning, applied to package behavior:
+
+- **patch** — typo fixes, metadata fixes, non-breaking skill improvements
+- **minor** — new skills, new CLI commands, new API helpers
+- **major** — breaking changes to the metadata schema, CLI behavior, or API return types
+
+Each `skill.json` also carries its own `version` field for fine-grained tracking of individual skill revisions.
 
 ## Contributing
 

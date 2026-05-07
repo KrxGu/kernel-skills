@@ -1,0 +1,12 @@
+{
+  "id": "quantization.write-fp8-kernel",
+  "name": "Write FP8 Kernel",
+  "category": "quantization",
+  "summary": "Design FP8 compute kernels for Hopper/Ada — E4M3/E5M2 format selection, satfinite conversion, delayed scaling, WGMMA on H100, and hipBLASLt on MI300X.",
+  "tags": ["quantization", "fp8", "e4m3", "e5m2", "hopper", "wgmma", "hipblaslt", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["cuda", "cpp", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/quantization/write-fp8-kernel/SKILL.md"
+}

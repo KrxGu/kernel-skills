@@ -1,0 +1,12 @@
+{
+  "id": "cuda.write-cuda-softmax-kernel",
+  "name": "Write CUDA Softmax Kernel",
+  "category": "cuda",
+  "summary": "Implement online or two-pass softmax with numerically stable max subtraction and correct warp-level reduction.",
+  "tags": ["cuda", "softmax", "numerical-stability", "warp-reduction", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/write-cuda-softmax-kernel/SKILL.md"
+}

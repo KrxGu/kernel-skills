@@ -1,0 +1,12 @@
+{
+  "id": "quantization.debug-quantized-kernel-accuracy",
+  "name": "Debug Quantized Kernel Accuracy",
+  "category": "quantization",
+  "summary": "Diagnose accuracy regressions in quantized kernels — scale validation, overflow detection, per-element error attribution, and calibration diagnostics.",
+  "tags": ["quantization", "debugging", "accuracy", "calibration", "overflow", "scale-validation", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["python", "cuda", "triton"],
+  "version": "0.1.0",
+  "entry": "skills/quantization/debug-quantized-kernel-accuracy/SKILL.md"
+}

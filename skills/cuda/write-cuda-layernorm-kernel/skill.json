@@ -1,0 +1,12 @@
+{
+  "id": "cuda.write-cuda-layernorm-kernel",
+  "name": "Write CUDA LayerNorm Kernel",
+  "category": "cuda",
+  "summary": "Implement layer normalization with Welford online variance, fused mean/variance computation, and fp32 accumulation in fp16 kernels.",
+  "tags": ["cuda", "layernorm", "rmsnorm", "normalization", "welford", "fp16", "fp32-accumulation", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/write-cuda-layernorm-kernel/SKILL.md"
+}

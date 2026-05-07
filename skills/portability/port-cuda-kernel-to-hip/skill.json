@@ -1,0 +1,12 @@
+{
+  "id": "portability.port-cuda-kernel-to-hip",
+  "name": "Port CUDA Kernel to HIP",
+  "category": "portability",
+  "summary": "Port CUDA to HIP/ROCm — wavefront width differences, 64-bit ballot masks, WMMA to rocWMMA, hipify audit checklist for MI250/MI300X targets.",
+  "tags": ["portability", "cuda", "hip", "rocm", "amd", "wavefront", "rocwmma", "hipify", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["amd", "nvidia"],
+  "languages": ["cuda", "hip", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/portability/port-cuda-kernel-to-hip/SKILL.md"
+}

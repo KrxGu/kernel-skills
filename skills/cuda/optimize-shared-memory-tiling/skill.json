@@ -1,0 +1,12 @@
+{
+  "id": "cuda.optimize-shared-memory-tiling",
+  "name": "Optimize CUDA Shared Memory Tiling",
+  "category": "cuda",
+  "summary": "Apply shared memory tiling with bank conflict analysis, padding strategies, and double buffering.",
+  "tags": ["cuda", "shared-memory", "tiling", "bank-conflicts", "double-buffering", "optimization", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/optimize-shared-memory-tiling/SKILL.md"
+}

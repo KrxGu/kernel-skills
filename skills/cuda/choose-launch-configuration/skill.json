@@ -1,0 +1,12 @@
+{
+  "id": "cuda.choose-launch-configuration",
+  "name": "Choose CUDA Launch Configuration",
+  "category": "cuda",
+  "summary": "Select block size, grid size, and shared memory from occupancy analysis, register budget, and workload shape.",
+  "tags": ["cuda", "launch-configuration", "occupancy", "block-size", "grid-size", "register-pressure", "gpu-kernels"],
+  "difficulty": "intermediate",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/choose-launch-configuration/SKILL.md"
+}

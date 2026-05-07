@@ -1,0 +1,12 @@
+{
+  "id": "cuda.avoid-warp-divergence",
+  "name": "Avoid CUDA Warp Divergence",
+  "category": "cuda",
+  "summary": "Classify avoidable vs unavoidable divergence, apply ballot/shuffle fast paths and stream compaction, and estimate the real cost before restructuring.",
+  "tags": ["cuda", "warp-divergence", "ballot", "shuffle", "stream-compaction", "optimization", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia"],
+  "languages": ["cuda", "cpp"],
+  "version": "0.1.0",
+  "entry": "skills/cuda/avoid-warp-divergence/SKILL.md"
+}

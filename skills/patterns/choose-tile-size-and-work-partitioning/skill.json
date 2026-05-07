@@ -1,0 +1,12 @@
+{
+  "id": "patterns.choose-tile-size-and-work-partitioning",
+  "name": "Choose Tile Size and Work Partitioning",
+  "category": "patterns",
+  "summary": "Reason about arithmetic intensity, shared memory budget, occupancy tradeoffs, and work partitioning for irregular shapes.",
+  "tags": ["tile-size", "work-partitioning", "arithmetic-intensity", "occupancy", "shared-memory", "gpu-kernels"],
+  "difficulty": "advanced",
+  "hardware": ["nvidia", "amd"],
+  "languages": ["cuda", "triton", "python"],
+  "version": "0.1.0",
+  "entry": "skills/patterns/choose-tile-size-and-work-partitioning/SKILL.md"
+}
