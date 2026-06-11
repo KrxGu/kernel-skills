@@ -65,7 +65,18 @@ Stable after skill: **0/16 failures**. Bandwidth within 1.2% of `torch.softmax`.
 
 ![Code diff — before and after skill guidance](proof/cuda/softmax/code-diff.png)
 
-→ [Full proof page with root-cause analysis and all charts](proof/cuda/softmax/softmax-correctness.md)
+
+### All proofs
+| Skill | Category | What the skill fixed | Result |
+|---|---|---|---|
+| [`write-cuda-softmax-kernel`](proof/cuda/softmax/softmax-correctness.md) | cuda | No max subtraction, no strided loop | Online softmax: 0/16 failures, 1.2% of torch bandwidth |
+| [`write-cuda-reduction-kernel`](proof/cuda/reduction/reduction-proof.md) | cuda | Serial reduction, no warp shuffle | Warp-shuffled tree reduction: 2.6–3.5× faster |
+| [`write-cuda-gemm-kernel`](proof/cuda/GEMM/gemm-proof.md) | cuda | Scalar inner loop, no tiling | Tiled GEMM with shared memory: 7.7–8.6× faster |
+| [`write-cuda-layernorm-kernel`](proof/cuda/layernorm/layernorm-proof.md) | cuda | Two-pass mean/var, no coalescing | Online Welford + vectorized: 1.9–3.2× faster |
+| [`write-triton-softmax-kernel`](proof/triton/softmax/triton-softmax-proof.md) | triton | Crashes at D≥16384 (OOR) | Online softmax: D up to 131072 |
+| [`write-triton-attention-kernel`](proof/triton/attention/triton-attention-proof.md) | triton | Crashes on GQA (H_q≠H_kv assert) | Grouped query attention: H_q ÷ group_size |
+| [`write-int8-quantized-kernel`](proof/quantization/int8/int8-quantized-proof.md) | quantization | Scalar madd, 4 kernel launches | dp4a + fused epilogue: 1.09–1.65× faster |
+| [`write-fp8-kernel`](proof/quantization/fp8/fp8-proof.md) | quantization | K-loop scale, no zero guard, no unroll | Epilogue dequant + guard + unroll: 2–16% faster |
 
 ---
 
