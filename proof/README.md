@@ -13,14 +13,17 @@ Mirrors `skills/`:
 ```
 proof/
 ├── cuda/
-│   └── softmax/          ← one subdirectory per kernel / experiment
-│       ├── hero-proof.png
-│       ├── error-cliff.png
-│       ├── code-diff.png
-│       └── softmax-correctness.md
+│   ├── GEMM/
+│   ├── layernorm/
+│   ├── reduction/
+│   └── softmax/
 ├── triton/
-├── patterns/
+│   ├── attention/
+│   └── softmax/
 ├── quantization/
+│   ├── fp8/
+│   └── int8/
+├── patterns/
 └── portability/
 ```
 
@@ -32,7 +35,8 @@ proof/
 2. Create a subdirectory under the matching category:
    `proof/<category>/<kernel-name>/`
 3. Drop your artifacts in — charts, PNGs, screenshots, raw numbers. A short `.md` is welcome but not required.
-4. Open a pull request. Include: GPU model, shapes tested, model used, whether the prompt was identical in both runs.
+4. Follow the existing proof format: `code-diff.md` (naive vs skilled code), `<topic>-proof.md` (summary + results), and result images.
+5. Open a pull request. Include: GPU model, shapes tested, model used, whether the prompt was identical in both runs.
 
 ### Minimum bar for a valid proof
 
@@ -47,6 +51,7 @@ A proof is stronger with more of these:
 | Artifact | Required |
 |---|---|
 | Before/after correctness comparison | Yes |
+| Code diff showing skill-guided changes | Yes |
 | Hardware and shape info | Yes |
 | Chart or screenshot | Recommended |
 | Benchmark script | Optional |
@@ -59,3 +64,10 @@ A proof is stronger with more of these:
 | Skill | Category | Evidence |
 |---|---|---|
 | `write-cuda-softmax-kernel` | cuda | [proof/cuda/softmax/](cuda/softmax/softmax-correctness.md) |
+| `write-cuda-reduction-kernel` | cuda | [proof/cuda/reduction/](cuda/reduction/reduction-proof.md) |
+| `write-cuda-gemm-kernel` | cuda | [proof/cuda/GEMM/](cuda/GEMM/gemm-proof.md) |
+| `write-cuda-layernorm-kernel` | cuda | [proof/cuda/layernorm/](cuda/layernorm/layernorm-proof.md) |
+| `write-triton-softmax-kernel` | triton | [proof/triton/softmax/](triton/softmax/triton-softmax-proof.md) |
+| `write-triton-attention-kernel` | triton | [proof/triton/attention/](triton/attention/triton-attention-proof.md) |
+| `write-int8-quantized-kernel` | quantization | [proof/quantization/int8/](quantization/int8/int8-quantized-proof.md) |
+| `write-fp8-kernel` | quantization | [proof/quantization/fp8/](quantization/fp8/fp8-proof.md) |
